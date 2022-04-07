@@ -1,0 +1,61 @@
+<!--- time-slot- code -->
+<div class="time-slot-input-time" id="time-slot-outer" th_cart-time-interval="1" th_cart-time-start="10:00 AM" th_cart-time-end="08:00 PM">
+    <select class="time-slot-input" id="time-slot-select-time">           </select>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.23.0/moment.min.js"></script>
+   <script type="text/javascript">
+   /* time slot using momentum js */
+   //Data
+   let time_interval = document.getElementById("time-slot-outer").getAttribute("th_cart-time-interval");
+   let time_start = document.getElementById("time-slot-outer").getAttribute("th_cart-time-start");
+   let time_end = document.getElementById("time-slot-outer").getAttribute("th_cart-time-end");
+   
+   let x = {
+     slotInterval:time_interval,
+     openTime: time_start,
+     closeTime: time_end
+   };
+   
+   //Format the time
+   let startTime = moment(x.openTime, "hh:mm A");
+   
+   //Format the end time and the next day to it 
+   // let endTimeEE = moment(x.closeTime, "hh:mm A").add(1, 'days');
+   let endTime = moment(x.closeTime, "hh:mm A");
+   
+   //Times
+   let allTimes = [];
+   
+   //Loop over the times - only pushes time with 30 minutes interval
+   while (startTime < endTime) {
+     //Push times
+      
+   
+     let start_time= startTime.format("hh:mm A");
+     let interval_time= startTime.add(x.slotInterval, 'hours'); // hours or minutes
+     let end_time = interval_time.format("hh:mm A");
+     let finaltime = start_time + "- "+ end_time;
+   
+     allTimes.push(finaltime); 
+     //Add interval of 30 minutes
+    
+   }
+   
+   //console.log(allTimes);
+   
+   let select_element = document.getElementById("time-slot-select-time");
+   for (let i=0; i< allTimes.length; i++)
+   {
+   //console.log(allTimes[i]);
+   
+   var option = document.createElement("option");
+   option.text = allTimes[i];
+   option.value = allTimes[i];
+   select_element.appendChild(option);
+   
+   }
+   
+   /* time slot using momentum js */
+   </script>
+   
+   <!---code --->
